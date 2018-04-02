@@ -1,0 +1,28 @@
+# Jekyller Services
+
+service: jekyller-services
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment: ${file(./env.yml)}
+
+functions:
+  updateContent:
+    handler: handler.updateContent
+    events:
+      - http:
+          path: updateContent
+          method: post
+          cors: true
+        allowCredentials: false
+  
+  createPost:
+    handler: handler.createPost
+    events:
+      - http:
+          path: createPost
+          method: post
+          cors: true
+        allowCredentials: false
+        
